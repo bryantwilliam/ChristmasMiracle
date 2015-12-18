@@ -1,11 +1,13 @@
 package com.gmail.gogobebe2.christmasmiracle;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockFormEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -36,5 +38,11 @@ public class ChristmasMiracle extends JavaPlugin implements Listener {
     @EventHandler
     private void onWeatherCHange(WeatherChangeEvent event) {
         event.setCancelled(true);
+    }
+
+    @EventHandler
+    private void onBlockPlace(BlockFormEvent event) {
+        Material type = event.getBlock().getType();
+        if (type == Material.SNOW || type == Material.SNOW_BLOCK) event.setCancelled(true);
     }
 }
