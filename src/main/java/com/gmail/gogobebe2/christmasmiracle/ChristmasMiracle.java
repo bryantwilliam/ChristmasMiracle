@@ -41,7 +41,7 @@ public class ChristmasMiracle extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-    private void onBlockPlace(BlockFormEvent event) {
+    private void onBlockForm(BlockFormEvent event) {
         Material type = event.getBlock().getType();
         if (type == Material.SNOW || type == Material.SNOW_BLOCK) event.setCancelled(true);
     }
