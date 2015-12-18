@@ -36,7 +36,7 @@ public class ChristmasMiracle extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-    private void onWeatherCHange(WeatherChangeEvent event) {
+    private void onWeatherChange(WeatherChangeEvent event) {
         event.setCancelled(true);
     }
 
