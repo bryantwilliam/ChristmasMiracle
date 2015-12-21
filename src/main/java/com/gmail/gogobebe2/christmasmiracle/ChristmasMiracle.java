@@ -1,10 +1,10 @@
 package com.gmail.gogobebe2.christmasmiracle;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFormEvent;
@@ -27,10 +27,14 @@ public class ChristmasMiracle extends JavaPlugin implements Listener {
 
     @EventHandler
     private void onChunkLoad(ChunkLoadEvent event) {
-        for (int x = 0; x < 15; x++) {
-            for (int z = 0; z < 15; z++) {
-                Block block = event.getChunk().getBlock(x, 60, z);
-                block.setBiome(Biome.ICE_MOUNTAINS);
+        Chunk chunk = event.getChunk();
+        int cX = chunk.getX() * 16; // make it a world coordinate...
+        int cZ = chunk.getZ() * 16;
+        World world = chunk.getWorld();
+
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                world.setBiome(cX + x, cZ + z, Biome.ICE_MOUNTAINS);
             }
         }
     }
