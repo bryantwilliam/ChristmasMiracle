@@ -5,6 +5,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFormEvent;
@@ -17,6 +18,10 @@ public class ChristmasMiracle extends JavaPlugin implements Listener {
     public void onEnable() {
         getLogger().info("Starting up " + this.getName() + ". If you need me to update this plugin, email at gogobebe2@gmail.com");
         for (World world : Bukkit.getWorlds()) {
+            for (Chunk loadedChunk : world.getLoadedChunks()) {
+                loadedChunk.unload();
+                loadedChunk.load();
+            }
             world.setWeatherDuration(Integer.MAX_VALUE);
             world.setStorm(true);
         }
@@ -51,7 +56,11 @@ public class ChristmasMiracle extends JavaPlugin implements Listener {
 
     @EventHandler
     private void onBlockForm(BlockFormEvent event) {
-        Material type = event.getBlock().getType();
-        if (type == Material.SNOW || type == Material.SNOW_BLOCK) event.setCancelled(true);
+        Block block = event.getBlock();
+        Material type = block.getType();
+        if (type == Material.SNOW || type == Material.SNOW_BLOCK) {
+            block.setType(Material.AIR);
+            event.setCancelled(true);
+        }
     }
 }
