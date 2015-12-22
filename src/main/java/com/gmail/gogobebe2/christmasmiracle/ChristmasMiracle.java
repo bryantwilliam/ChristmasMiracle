@@ -16,7 +16,10 @@ public class ChristmasMiracle extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         getLogger().info("Starting up " + this.getName() + ". If you need me to update this plugin, email at gogobebe2@gmail.com");
-        for (World world : Bukkit.getWorlds()) world.setStorm(true);
+        for (World world : Bukkit.getWorlds()) {
+            world.setWeatherDuration(Integer.MAX_VALUE);
+            world.setStorm(true);
+        }
         Bukkit.getPluginManager().registerEvents(this, this);
     }
 
@@ -34,14 +37,15 @@ public class ChristmasMiracle extends JavaPlugin implements Listener {
 
         for (int x = cX - 16; x < cX + 16; x++) {
             for (int z = cZ - 16; z < cZ + 16; z++) {
-                world.setBiome(x, z, Biome.ICE_MOUNTAINS);
+                world.setBiome(x, z, Biome.ICE_PLAINS);
             }
         }
     }
 
     @EventHandler
     private void onWeatherChange(WeatherChangeEvent event) {
-        event.getWorld().setStorm(true);
+        World world = event.getWorld();
+        world.setWeatherDuration(Integer.MAX_VALUE);
         event.setCancelled(true);
     }
 
