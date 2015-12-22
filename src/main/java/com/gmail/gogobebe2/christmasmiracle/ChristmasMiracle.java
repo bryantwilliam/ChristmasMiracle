@@ -32,15 +32,16 @@ public class ChristmasMiracle extends JavaPlugin implements Listener {
         int cZ = chunk.getZ() * 16;
         World world = chunk.getWorld();
 
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                world.setBiome(cX + x, cZ + z, Biome.ICE_MOUNTAINS);
+        for (int x = cX - 16; x < cX + 16; x++) {
+            for (int z = cZ - 16; z < cZ + 16; z++) {
+                world.setBiome(x, z, Biome.ICE_MOUNTAINS);
             }
         }
     }
 
     @EventHandler
     private void onWeatherChange(WeatherChangeEvent event) {
+        event.getWorld().setStorm(true);
         event.setCancelled(true);
     }
 
