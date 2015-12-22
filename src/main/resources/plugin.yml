@@ -4,8 +4,3 @@ main: com.gmail.gogobebe2.christmasmiracle.ChristmasMiracle
 description: Allows creation of everlasting snow.
 author: William Bryant (gogobebe2)
 website: gogobebe2@gmail.com
-commands:
-  snow:
-permissions:
-  snow.*:
-    default: op
